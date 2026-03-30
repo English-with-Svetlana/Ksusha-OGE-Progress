@@ -458,7 +458,6 @@
 
                 card.appendChild(grid);
 
-                // Final result с шкалой оценок
                 const finalBlock = document.createElement('div');
                 finalBlock.className = 'final-result';
 
@@ -468,7 +467,6 @@
 
                 const gradingScale = document.createElement('span');
                 gradingScale.className = 'grading-scale';
-                // Каждая оценка в отдельном span с классом grade-line
                 gradingScale.innerHTML = '<span class="grade-line">0–28 points - оценка <span class="grade-mark">2</span></span><span class="grade-line">29–45 points - оценка <span class="grade-mark">3</span></span><span class="grade-line">46–57 points - оценка <span class="grade-mark">4</span></span><span class="grade-line">58–68 points - оценка <span class="grade-mark">5</span></span>';
 
                 const finalScore = document.createElement('div');
@@ -485,6 +483,25 @@
         }
 
         renderCards();
+    </script>
+
+    <!-- СКРИПТ АВТО-ОБНОВЛЕНИЯ -->
+    <script>
+        // Проверяем актуальность страницы каждые 2 минуты (120000 мс)
+        setInterval(() => {
+            fetch(window.location.href, { cache: 'no-cache' })
+                .then(response => response.text())
+                .then(html => {
+                    // Если содержимое на сервере отличается от текущего
+                    if (html !== document.documentElement.outerHTML) {
+                        // Перезагружаем страницу
+                        window.location.reload();
+                    }
+                })
+                .catch(() => {
+                    // Если ошибка сети - просто игнорируем
+                });
+        }, 120000);
     </script>
 </body>
 </html>

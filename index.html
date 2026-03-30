@@ -2,6 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ksusha's OGE Progress (ФИПИ tests)</title>
     <style>
@@ -178,40 +181,146 @@
             white-space: nowrap;
         }
 
+        /* Desktop styles */
         @media (min-width: 768px) {
-            body { padding: 20px; }
-            header { justify-content: space-between; padding: 20px; margin-bottom: 30px; }
-            .header-info { gap: 15px; }
-            .avatar { width: 80px; height: 80px; }
-            h1 { font-size: 1.8rem; }
-            .variant-card { padding: 20px; }
-            .variant-title { font-size: 1.4rem; margin-bottom: 15px; }
-            .tasks-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-bottom: 20px; }
-            .task-item { padding: 10px; }
-            .task-label { font-size: 0.85rem; }
-            .score-box { padding: 8px; font-size: 1.1rem; }
-            .final-result { padding: 15px; }
-            .final-label { font-size: 1.1rem; }
-            .grading-scale { font-size: 0.75rem; }
-            .grade-line { display: inline; }
-            .final-score { padding: 10px 20px; font-size: 1.2rem; min-width: 80px; }
+            body {
+                padding: 20px;
+            }
+
+            header {
+                justify-content: space-between;
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .header-info {
+                gap: 15px;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .variant-card {
+                padding: 20px;
+            }
+
+            .variant-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .task-item {
+                padding: 10px;
+            }
+
+            .task-label {
+                font-size: 0.85rem;
+            }
+
+            .score-box {
+                padding: 8px;
+                font-size: 1.1rem;
+            }
+
+            .final-result {
+                padding: 15px;
+            }
+
+            .final-label {
+                font-size: 1.1rem;
+            }
+
+            .grading-scale {
+                font-size: 0.75rem;
+            }
+
+            .grade-line {
+                display: inline;
+            }
+
+            .final-score {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+                min-width: 80px;
+            }
         }
 
+        /* Mobile styles */
         @media (max-width: 767px) {
-            .final-result { flex-wrap: wrap; gap: 10px; }
-            .grading-scale { width: 100%; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.8; font-size: 0.75rem; text-align: center; display: flex; flex-direction: column; gap: 3px; }
-            .grade-line { display: block; margin: 2px 0; }
-            .final-label { font-size: 0.95rem; }
-            .final-score { font-size: 1rem; padding: 8px 12px; min-width: 65px; }
+            .final-result {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .grading-scale {
+                width: 100%;
+                white-space: normal;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                line-height: 1.8;
+                font-size: 0.75rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .grade-line {
+                display: block;
+                margin: 2px 0;
+            }
+
+            .final-label {
+                font-size: 0.95rem;
+            }
+
+            .final-score {
+                font-size: 1rem;
+                padding: 8px 12px;
+                min-width: 65px;
+            }
         }
 
+        /* Small mobile devices */
         @media (max-width: 480px) {
-            .tasks-grid { grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 6px; }
-            .task-item { padding: 6px 3px; }
-            .task-label { font-size: 0.7rem; }
-            .score-box { padding: 5px 2px; font-size: 0.9rem; }
-            .grading-scale { font-size: 0.7rem; gap: 4px; }
-            .grade-line { font-size: 0.75rem; }
+            .tasks-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: 6px;
+            }
+
+            .task-item {
+                padding: 6px 3px;
+            }
+
+            .task-label {
+                font-size: 0.7rem;
+            }
+
+            .score-box {
+                padding: 5px 2px;
+                font-size: 0.9rem;
+            }
+
+            .grading-scale {
+                font-size: 0.7rem;
+                gap: 4px;
+            }
+
+            .grade-line {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -224,23 +333,95 @@
         </div>
     </header>
 
-    <main class="container" id="app"></main>
+    <main class="container" id="app">
+    </main>
 
-    <!-- Сначала загружаем данные (с меткой времени для обхода кеша) -->
-    <script src="data.js"></script>
-    
     <script>
+        // ==========================================================
+        // НАСТРОЙКИ ДАННЫХ (РЕДАКТИРУЙ ЭТУ ЧАСТЬ)
+        // ==========================================================
+        
         const studentAvatar = "avatar.jpg";
+
         const maxScores = {
-            "1-4": 4, "5": 5, "6-11": 6, "12": 6, "13-19": 7,
-            "20-28": 9, "29-34": 6, "35": 10,
-            "Текст": 2, "Интервью": 6, "Монолог": 7
+            "1-4": 4,
+            "5": 5,
+            "6-11": 6,
+            "12": 6,
+            "13-19": 7,
+            "20-28": 9,
+            "29-34": 6,
+            "35": 10,
+            "Текст": 2,
+            "Интервью": 6,
+            "Монолог": 7
         };
+
         const taskGroups = ["1-4", "5", "6-11", "12", "13-19", "20-28", "29-34", "35", "Текст", "Интервью", "Монолог"];
         const finalMaxScore = 68;
 
+        // Данные для 10 вариантов
+        // МЕНЯЙ ТОЛЬКО ПЕРВУЮ ЦИФРУ (полученный балл)
+        const progressData = [
+            {
+                variant: 1,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 2,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 3,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 4,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 5,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 6,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 7,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 8,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 9,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 10,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            }
+        ];
+
+        // ==========================================================
+        // ЛОГИКА ОТРИСОВКИ (НЕ МЕНЯТЬ)
+        // ==========================================================
+
         const app = document.getElementById('app');
         const headerAvatar = document.querySelector('.avatar');
+
         headerAvatar.src = studentAvatar;
 
         function renderCards() {
@@ -259,12 +440,15 @@
                 taskGroups.forEach(group => {
                     const item = document.createElement('div');
                     item.className = 'task-item';
+
                     const label = document.createElement('span');
                     label.className = 'task-label';
                     label.textContent = group;
+
                     const scoreBox = document.createElement('div');
                     scoreBox.className = 'score-box';
                     scoreBox.textContent = `${data.scores[group]}/${maxScores[group]}`;
+
                     item.appendChild(label);
                     item.appendChild(scoreBox);
                     grid.appendChild(item);
@@ -272,14 +456,19 @@
 
                 card.appendChild(grid);
 
+                // Final result с шкалой оценок
                 const finalBlock = document.createElement('div');
                 finalBlock.className = 'final-result';
+
                 const finalLabel = document.createElement('span');
                 finalLabel.className = 'final-label';
                 finalLabel.textContent = 'Final result';
+
                 const gradingScale = document.createElement('span');
                 gradingScale.className = 'grading-scale';
-                gradingScale.innerHTML = '<span class="grade-line">0–28 points - оценка <span class="grade-mark">2</span></span><span class="grade-line">29–45 points - оценка <span class="grade-mark">3</span></span><span class="grade-line">46–57 points - оценка <span class="grade-mark">4</span></span><span class="grade-line">58–68 points - оценка <span class="grade-mark">5</span></span>';
+                // Добавлены запятые и пробелы между оценками
+                gradingScale.innerHTML = '<span class="grade-line">0–28 points - оценка <span class="grade-mark">2</span>, </span><span class="grade-line">29–45 points - оценка <span class="grade-mark">3</span>, </span><span class="grade-line">46–57 points - оценка <span class="grade-mark">4</span>, </span><span class="grade-line">58–68 points - оценка <span class="grade-mark">5</span></span>';
+
                 const finalScore = document.createElement('div');
                 finalScore.className = 'final-score';
                 finalScore.textContent = `${data.final}/${finalMaxScore}`;
@@ -288,6 +477,7 @@
                 finalBlock.appendChild(gradingScale);
                 finalBlock.appendChild(finalScore);
                 card.appendChild(finalBlock);
+
                 app.appendChild(card);
             });
         }

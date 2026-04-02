@@ -67,9 +67,8 @@
 
         /* Строка с вариантами */
         .variants-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
             gap: 8px;
             width: 100%;
             padding: 10px;
@@ -79,21 +78,25 @@
 
         .variant-nav-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 4px;
             background-color: rgba(255, 255, 255, 0.3);
-            padding: 4px 8px;
+            padding: 6px 4px;
             border-radius: 6px;
+            min-width: 0;
         }
 
         .variant-nav-number {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: bold;
             color: white;
         }
 
         .variant-nav-score {
-            width: 50px;
+            width: 100%;
+            max-width: 45px;
             padding: 4px;
             font-size: 0.85rem;
             text-align: center;
@@ -246,12 +249,13 @@
             }
 
             .variants-nav {
+                grid-template-columns: repeat(10, 1fr);
                 gap: 12px;
                 padding: 15px;
             }
 
             .variant-nav-item {
-                padding: 6px 10px;
+                padding: 8px 6px;
             }
 
             .variant-nav-number {
@@ -259,7 +263,7 @@
             }
 
             .variant-nav-score {
-                width: 55px;
+                max-width: 55px;
                 padding: 6px;
                 font-size: 0.95rem;
             }
@@ -330,9 +334,6 @@
                 line-height: 1.8;
                 font-size: 0.75rem;
                 text-align: center;
-                display: flex;
-                flex-direction: column;
-                gap: 3px;
             }
 
             .grade-line {
@@ -364,7 +365,7 @@
             }
 
             .variant-nav-score {
-                width: 45px;
+                max-width: 45px;
                 padding: 4px;
                 font-size: 0.8rem;
             }
@@ -372,6 +373,26 @@
 
         /* Small mobile devices */
         @media (max-width: 480px) {
+            .variants-nav {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+                padding: 6px;
+            }
+
+            .variant-nav-item {
+                padding: 3px 5px;
+            }
+
+            .variant-nav-number {
+                font-size: 0.7rem;
+            }
+
+            .variant-nav-score {
+                max-width: 40px;
+                padding: 3px;
+                font-size: 0.75rem;
+            }
+
             .tasks-grid {
                 grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
                 gap: 6px;
@@ -396,25 +417,6 @@
             }
 
             .grade-line {
-                font-size: 0.75rem;
-            }
-
-            .variants-nav {
-                gap: 4px;
-                padding: 6px;
-            }
-
-            .variant-nav-item {
-                padding: 3px 5px;
-            }
-
-            .variant-nav-number {
-                font-size: 0.7rem;
-            }
-
-            .variant-nav-score {
-                width: 42px;
-                padding: 3px;
                 font-size: 0.75rem;
             }
         }

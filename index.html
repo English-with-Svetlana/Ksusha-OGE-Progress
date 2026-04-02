@@ -37,8 +37,9 @@
             padding: 15px;
             border-radius: var(--border-radius);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            gap: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
@@ -62,6 +63,45 @@
             margin: 0;
             font-size: 1.2rem;
             text-align: center;
+        }
+
+        /* Строка с вариантами */
+        .variants-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .variant-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .variant-nav-number {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .variant-nav-score {
+            width: 50px;
+            padding: 4px;
+            font-size: 0.85rem;
+            text-align: center;
+            border: 2px solid white;
+            border-radius: 4px;
+            background-color: white;
+            color: var(--primary-blue);
+            font-weight: bold;
         }
 
         .container {
@@ -188,7 +228,6 @@
             }
 
             header {
-                justify-content: space-between;
                 padding: 20px;
                 margin-bottom: 30px;
             }
@@ -204,6 +243,25 @@
 
             h1 {
                 font-size: 1.8rem;
+            }
+
+            .variants-nav {
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .variant-nav-item {
+                padding: 6px 10px;
+            }
+
+            .variant-nav-number {
+                font-size: 0.95rem;
+            }
+
+            .variant-nav-score {
+                width: 55px;
+                padding: 6px;
+                font-size: 0.95rem;
             }
 
             .variant-card {
@@ -291,6 +349,25 @@
                 padding: 8px 12px;
                 min-width: 65px;
             }
+
+            .variants-nav {
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .variant-nav-item {
+                padding: 4px 6px;
+            }
+
+            .variant-nav-number {
+                font-size: 0.75rem;
+            }
+
+            .variant-nav-score {
+                width: 45px;
+                padding: 4px;
+                font-size: 0.8rem;
+            }
         }
 
         /* Small mobile devices */
@@ -321,6 +398,25 @@
             .grade-line {
                 font-size: 0.75rem;
             }
+
+            .variants-nav {
+                gap: 4px;
+                padding: 6px;
+            }
+
+            .variant-nav-item {
+                padding: 3px 5px;
+            }
+
+            .variant-nav-number {
+                font-size: 0.7rem;
+            }
+
+            .variant-nav-score {
+                width: 42px;
+                padding: 3px;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -331,6 +427,11 @@
             <img src="avatar.jpg" alt="Student Avatar" class="avatar">
             <h1>Ksusha's OGE Progress (ФИПИ tests)</h1>
         </div>
+        
+        <!-- Строка с вариантами и полями для баллов -->
+        <div class="variants-nav" id="variantsNav">
+            <!-- Генерируется через JavaScript -->
+        </div>
     </header>
 
     <main class="container" id="app">
@@ -338,7 +439,7 @@
 
     <script>
         // ==========================================================
-        // НАСТРОЙКИ ДАННЫХ (РЕДАКТИРУЙ ЭТУ ЧАСТЬ)
+        // НАСТРОЙКИ ДАННЫХ (РЕДАКТИРУЙ ЭТУ ЧАСТЬ НА GITHUB)
         // ==========================================================
         
         const studentAvatar = "avatar.jpg";
@@ -360,56 +461,127 @@
         const taskGroups = ["1-4", "5", "6-11", "12", "13-19", "20-28", "29-34", "35", "Текст", "Интервью", "Монолог"];
         const finalMaxScore = 68;
 
-        // Данные для 10 вариантов
+        // Данные для 20 вариантов
         // МЕНЯЙ ТОЛЬКО ПЕРВУЮ ЦИФРУ (полученный балл)
+        // headerScore - это число для верхней строки (меняй на GitHub)
         const progressData = [
             {
                 variant: 1,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 2,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 3,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 4,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 5,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 6,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 7,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 8,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 9,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             },
             {
                 variant: 10,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 11,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 12,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 13,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 14,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 15,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 16,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 17,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 18,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 19,
+                headerScore: 0,
+                scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
+                final: 0
+            },
+            {
+                variant: 20,
+                headerScore: 0,
                 scores: { "1-4": 0, "5": 0, "6-11": 0, "12": 0, "13-19": 0, "20-28": 0, "29-34": 0, "35": 0, "Текст": 0, "Интервью": 0, "Монолог": 0 },
                 final: 0
             }
@@ -421,8 +593,31 @@
 
         const app = document.getElementById('app');
         const headerAvatar = document.querySelector('.avatar');
+        const variantsNav = document.getElementById('variantsNav');
 
         headerAvatar.src = studentAvatar;
+
+        // Рендер верхней навигации с вариантами (только просмотр!)
+        function renderVariantsNav() {
+            variantsNav.innerHTML = '';
+            progressData.forEach((data) => {
+                const item = document.createElement('div');
+                item.className = 'variant-nav-item';
+
+                const number = document.createElement('span');
+                number.className = 'variant-nav-number';
+                number.textContent = data.variant;
+
+                // Поле только для просмотра (не input!)
+                const scoreBox = document.createElement('div');
+                scoreBox.className = 'variant-nav-score';
+                scoreBox.textContent = data.headerScore;
+
+                item.appendChild(number);
+                item.appendChild(scoreBox);
+                variantsNav.appendChild(item);
+            });
+        }
 
         function renderCards() {
             progressData.forEach(data => {
@@ -466,7 +661,6 @@
 
                 const gradingScale = document.createElement('span');
                 gradingScale.className = 'grading-scale';
-                // Добавлены запятые и пробелы между оценками
                 gradingScale.innerHTML = '<span class="grade-line">0–28 points - оценка <span class="grade-mark">2</span>, </span><span class="grade-line">29–45 points - оценка <span class="grade-mark">3</span>, </span><span class="grade-line">46–57 points - оценка <span class="grade-mark">4</span>, </span><span class="grade-line">58–68 points - оценка <span class="grade-mark">5</span></span>';
 
                 const finalScore = document.createElement('div');
@@ -482,6 +676,8 @@
             });
         }
 
+        // Инициализация
+        renderVariantsNav();
         renderCards();
     </script>
 </body>
